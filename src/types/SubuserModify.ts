@@ -1,6 +1,6 @@
 import { Permission } from "./Permission";
 
 export interface SubuserModify {
-	email: string,
+	uuid: string,
 	permissions: Permission[],
 }
