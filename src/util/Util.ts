@@ -1,10 +1,12 @@
-import { Database } from 'sqlite3';
+import Database from 'sqlite-async';
 import { join } from 'path';
 import { genSalt, hash } from 'bcrypt';
 import { Response } from 'express';
 
+let database: Database;
+
 export async function getMain(): Promise<Database> {
-	return new Database(join(__dirname, '../../main.db'));
+	return database ?? (database = Database.open(join(__dirname, '../../main.db')));
 }
 
 export async function hashPassword(password: string, salt?: string) {
